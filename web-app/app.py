@@ -176,10 +176,12 @@ with gr.Blocks(title="Driver Drowsiness Detection") as demo:
         fn=process_frame,
         inputs=[webcam_input, closed_frame_state],
         outputs=[output_image, closed_frame_state, alarm_audio],
+        time_limit=60,
+        stream_every=0.2,
+        concurrency_limit=10,
     )
 
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 7860))
     demo.launch(server_name="0.0.0.0", server_port=port)
-    
